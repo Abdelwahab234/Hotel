@@ -1,0 +1,32 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - appNetwork
+    
+
+  postgres:
+    image: postgres:17-alpine
+
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: HotelDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - appNetwork
+
+networks:
+  appNetwork:
+    driver: bridge
+volumes:
+  postgres_data:
