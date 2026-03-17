@@ -11,6 +11,7 @@ RUN npm install -g pnpm
 # انسخ باقي المشروع
 COPY . .
 
+EXPOSE 3000
 
 RUN pnpm install
 
